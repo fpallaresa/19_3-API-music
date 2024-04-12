@@ -1,30 +1,30 @@
 const express = require("express");
 
 // Modelos
-const { Author } = require("../models/Author.js");
-const { Book } = require("../models/Book.js");
+const { Artist } = require("../models/Artist.js");
+const { Song } = require("../models/Song.js");
 
-// Router propio de Autores
+// Router propio de Artistas
 const router = express.Router();
 
-// CRUD: READ - devuelve todos los autores (params opcionales http://localhost:3000/author?page=1&limit=10)
+// CRUD: READ - devuelve todos los artistaes (params opcionales http://localhost:3000/artist?page=1&limit=10)
 router.get("/", async (req, res) => {
   try {
     // Asi leemos query params
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
-    const author = await Author.find()
+    const artist = await Artist.find()
       .limit(limit)
       .skip((page - 1) * limit)
 
     // Num total de elementos
-    const totalElements = await Author.countDocuments();
+    const totalElements = await Artist.countDocuments();
 
     const response = {
       totalItems: totalElements,
       totalPages: Math.ceil(totalElements / limit),
       currentPage: page,
-      data: author,
+      data: artist,
     };
 
     res.json(response);
@@ -33,26 +33,26 @@ router.get("/", async (req, res) => {
   }
 });
 
-// CRUD: CREATE - crea nuevo autor
+// CRUD: CREATE - crea nuevo artista
 router.post("/", async (req, res) => {
   try {
-    const author = new Author(req.body);
-    const createdAuthor = await author.save();
-    return res.status(201).json(createdAuthor);
+    const artist = new Artist(req.body);
+    const createdArtist = await artist.save();
+    return res.status(201).json(createdArtist);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
-// NO CRUD - Busca autor por nombre
+// NO CRUD - Busca artista por nombre
 router.get("/name/:name", async (req, res) => {
   const name = req.params.name;
 
   try {
-    const author = await Author.find({ name: new RegExp("^" + name.toLowerCase(), "i") });
+    const artist = await Artist.find({ name: new RegExp("^" + name.toLowerCase(), "i") });
 
-    if (author?.length) {
-      res.json(author);
+    if (artist?.length) {
+      res.json(artist);
     } else {
       res.status(404).json([]);
     }
@@ -61,13 +61,13 @@ router.get("/name/:name", async (req, res) => {
   }
 });
 
-// CRUD: DELETE - Elimina autor
+// CRUD: DELETE - Elimina artista
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const authorDeleted = await Author.findByIdAndDelete(id);
-    if (authorDeleted) {
-      res.json(authorDeleted);
+    const artistDeleted = await Artist.findByIdAndDelete(id);
+    if (artistDeleted) {
+      res.json(artistDeleted);
     } else {
       res.status(404).json({});
     }
@@ -76,13 +76,13 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// CRUD: UPDATE - modifica autor
+// CRUD: UPDATE - modifica artista
 router.put("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const authorUpdated = await Author.findByIdAndUpdate(id, req.body, { new: true });
-    if (authorUpdated) {
-      res.json(authorUpdated);
+    const artistUpdated = await Artist.findByIdAndUpdate(id, req.body, { new: true });
+    if (artistUpdated) {
+      res.json(artistUpdated);
     } else {
       res.status(404).json({});
     }
@@ -91,21 +91,21 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// CRUD: READ - busca autor por id
+// CRUD: READ - busca artista por id
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const author = await Author.findById(id);
+    const artist = await Artist.findById(id);
 
-    if (author) {
-      const temporalAuthor = author.toObject();
-      const includeBooks = req.query.includeBooks === "true";
-      if (includeBooks) {
-        const books = await Book.find({ author: id });
-        temporalAuthor.books = books;
+    if (artist) {
+      const temporalArtist = artist.toObject();
+      const includeSongs = req.query.includeSongs === "true";
+      if (includeSongs) {
+        const songs = await Song.find({ artist: id });
+        temporalArtist.songs = songs;
       }
 
-      res.json(temporalAuthor);
+      res.json(temporalArtist);
     } else {
       res.status(404).json({});
     }
@@ -114,4 +114,4 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-module.exports = { authorRouter: router };
+module.exports = { artistRouter: router };

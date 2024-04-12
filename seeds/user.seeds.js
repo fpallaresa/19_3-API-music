@@ -37,7 +37,7 @@ const userSeed = async () => {
     const documents = userList.map((user) => new User(user));
     await User.insertMany(documents);
 
-    console.log("Autores creados correctamente!");
+    console.log("Usuarios creados correctamente!");
   } catch (error) {
     console.error(error);
   } finally {
