@@ -1,7 +1,7 @@
 const express = require("express");
 const { userRouter } = require("./routes/user.routes.js");
 const { artistRouter } = require("./routes/artist.routes.js");
-// const { songRouter } = require("./routes/song.routes.js");
+const { songRouter } = require("./routes/song.routes.js");
 // const { playlistRouter } = require("./routes/playlist.routes.js");
 
 // Conexión a la BBDD
@@ -27,7 +27,7 @@ const main = async () => {
   // Usamos las rutas
   server.use("/user", userRouter);
   server.use("/artist", artistRouter);
-  // server.use("/song", songRouter);
+  server.use("/song", songRouter);
   // server.use("/playlist", playlistRouter);
   server.use("/", router);
 

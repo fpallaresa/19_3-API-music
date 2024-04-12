@@ -11,7 +11,8 @@
     "seed:artist": "node ./seeds/artist.seeds.js",
     "seed:song": "node ./seeds/song.seeds.js",
     "seed:playlist": "node ./seeds/playlist.seeds.js",
-    "seed:all": "npm run seed:user && npm run seed:artist && npm run seed:song && npm run seed:playlist && npm run seed:books-relations",
+    "seed:song-relations": "node ./seeds/song-relations.seed.js",
+    "seed:all": "npm run seed:user && npm run seed:artist && npm run seed:song && npm run seed:playlist && npm run seed:song-relations",
     "prepare": "husky install",
     "lint": "eslint ."
   },
