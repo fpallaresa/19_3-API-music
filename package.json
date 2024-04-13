@@ -12,7 +12,9 @@
     "seed:song": "node ./seeds/song.seeds.js",
     "seed:playlist": "node ./seeds/playlist.seeds.js",
     "seed:song-relations": "node ./seeds/song-relations.seed.js",
-    "seed:all": "npm run seed:user && npm run seed:artist && npm run seed:song && npm run seed:playlist && npm run seed:song-relations",
+    "seed:playlist-song-relations": "node ./seeds/playlist-song-relations.seed.js",
+    "seed:playlist-user-relations": "node ./seeds/playlist-user-relations.seed.js",
+    "seed:all": "npm run seed:user && npm run seed:artist && npm run seed:song && npm run seed:playlist && npm run seed:song-relations && npm run seed:playlist-song-relations && npm run seed:playlist-user-relations",
     "prepare": "husky install",
     "lint": "eslint ."
   },

@@ -12,6 +12,16 @@ const playlistSeed = async () => {
     console.log("Playlist eliminadas");
 
     const playlistList = [
+      { name: "The best songs forever" },
+      { name: "Collection of songs" },
+      { name: "Rock collection" },
+      { name: "The best playlist" },
+      { name: "Music for walk" },
+      { name: "Music for cook" },
+      { name: "Sweat playlist" },
+      { name: "Romantic songs" },
+      { name: "Chill out collection" },
+      { name: "Sid Vicious Collection" },
     ];
 
     const documents = playlistList.map((playlist) => new Playlist(playlist));

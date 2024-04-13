@@ -8,11 +8,11 @@ const playlistSchema = new Schema(
       type: String,
       required: true,
     },
-    song: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Song",
-      required: false,
-    },
+    songs: [{ 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Song',
+      required: false, 
+    }],
     creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

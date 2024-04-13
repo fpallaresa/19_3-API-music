@@ -4,7 +4,7 @@ const { Song } = require("../models/Song.js");
 const { Artist } = require("../models/Artist.js");
 const { generateRandom } = require("../utils.js");
 
-const songReslationsSeed = async () => {
+const songRelationsSeed = async () => {
   try {
     await connect();
     console.log("Tenemos conexión!");
@@ -38,4 +38,4 @@ const songReslationsSeed = async () => {
   }
 };
 
-songReslationsSeed();
+songRelationsSeed();
